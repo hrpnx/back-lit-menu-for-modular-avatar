@@ -1,0 +1,12 @@
+{
+    "name": "BackLitMenuForModularAvatar.Editor",
+    "rootNamespace": "dev.hrpnx.back_lit_menu_for_modular_avatar.editor",
+    "references": [
+        "nadena.dev.modular-avatar.core",
+        "nadena.dev.ndmf",
+        "BackLitMenuForModularAvatar.Runtime"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ]
+}
