@@ -11,7 +11,6 @@ using VRC.SDK3.Avatars.Components;
 using VRC.SDK3.Avatars.ScriptableObjects;
 using System;
 using nadena.dev.modular_avatar.core;
-using UnityEngine.SceneManagement;
 
 [assembly: ExportsPlugin(typeof(Plugin))]
 
@@ -64,7 +63,7 @@ namespace dev.hrpnx.back_lit_menu_for_modular_avatar.editor
             Directory.CreateDirectory(destDir);
             AssetDatabase.Refresh();
 
-            var baseName = "RimShade";
+            var baseName = "BackLit";
 
             // create animation clip (on)
             var destAnimClipOnFilePath = Path.Combine(destDir, $"{baseName}_On.anim");
@@ -73,15 +72,18 @@ namespace dev.hrpnx.back_lit_menu_for_modular_avatar.editor
             foreach (var renderer in renderers)
             {
                 var transform = renderer.gameObject.transform;
-                this.AddAnimation(transform, avatarRoot.transform, animOnClip, "material._UseRimShade", 1);
-                this.AddAnimation(transform, avatarRoot.transform, animOnClip, "material._RimShadeColor.r", menuInstaller.Color.r);
-                this.AddAnimation(transform, avatarRoot.transform, animOnClip, "material._RimShadeColor.g", menuInstaller.Color.g);
-                this.AddAnimation(transform, avatarRoot.transform, animOnClip, "material._RimShadeColor.b", menuInstaller.Color.b);
-                this.AddAnimation(transform, avatarRoot.transform, animOnClip, "material._RimShadeColor.a", menuInstaller.Color.a);
-                this.AddAnimation(transform, avatarRoot.transform, animOnClip, "material._RimShadeNormalStrength", menuInstaller.NormalStrength);
-                this.AddAnimation(transform, avatarRoot.transform, animOnClip, "material._RimShadeBorder", menuInstaller.Border);
-                this.AddAnimation(transform, avatarRoot.transform, animOnClip, "material._RimShadeBlur", menuInstaller.Blur);
-                this.AddAnimation(transform, avatarRoot.transform, animOnClip, "material._RimShadeFresnelPower", menuInstaller.FresnelPower);
+
+                this.AddAnimation(transform, avatarRoot.transform, animOnClip, "material._UseBacklight", 1, menuInstaller.Exclusions);
+                this.AddAnimation(transform, avatarRoot.transform, animOnClip, "material._BacklightColor.r", 12, menuInstaller.Exclusions);
+                this.AddAnimation(transform, avatarRoot.transform, animOnClip, "material._BacklightColor.g", 12, menuInstaller.Exclusions);
+                this.AddAnimation(transform, avatarRoot.transform, animOnClip, "material._BacklightColor.b", 12, menuInstaller.Exclusions);
+                this.AddAnimation(transform, avatarRoot.transform, animOnClip, "material._BacklightColor.a", 1, menuInstaller.Exclusions);
+                this.AddAnimation(transform, avatarRoot.transform, animOnClip, "material._BacklightMainStrength", 0.5f, menuInstaller.Exclusions);
+                this.AddAnimation(transform, avatarRoot.transform, animOnClip, "material._BacklightNormalStrength", 1, menuInstaller.Exclusions);
+                this.AddAnimation(transform, avatarRoot.transform, animOnClip, "material._BacklightBorder", 0.6f, menuInstaller.Exclusions);
+                this.AddAnimation(transform, avatarRoot.transform, animOnClip, "material._BacklightBlur", 0.2f, menuInstaller.Exclusions);
+                this.AddAnimation(transform, avatarRoot.transform, animOnClip, "material._BacklightDirectivity", 10, menuInstaller.Exclusions);
+                this.AddAnimation(transform, avatarRoot.transform, animOnClip, "material._BacklightViewStrength", 1, menuInstaller.Exclusions);
             }
 
             this.CreateAsset(animOnClip, destAnimClipOnFilePath);
@@ -93,7 +95,7 @@ namespace dev.hrpnx.back_lit_menu_for_modular_avatar.editor
             foreach (var renderer in renderers)
             {
                 var transform = renderer.gameObject.transform;
-                this.AddAnimation(transform, avatarRoot.transform, animOffClip, "material._UseRimShade", 0);
+                this.AddAnimation(transform, avatarRoot.transform, animOffClip, "material._UseBacklight", 0, menuInstaller.Exclusions);
             }
 
             this.CreateAsset(animOffClip, destAnimClipOffFilePath);
@@ -207,14 +209,14 @@ namespace dev.hrpnx.back_lit_menu_for_modular_avatar.editor
             return parent == root ? path : null;
         }
 
-        private void AddAnimation(Transform transform, Transform rootTransform, AnimationClip clip, string propertyName, float value)
+        private void AddAnimation(Transform transform, Transform rootTransform, AnimationClip clip, string propertyName, float value, List<Material> exclusions)
         {
             var path = this.GetRelativePath(transform, rootTransform);
             var renderer = transform.GetComponent<Renderer>();
 
             foreach (var mat in renderer.sharedMaterials)
             {
-                if (mat == null || mat.shader.name.IndexOf("lilToon") < 0)
+                if (mat == null || mat.shader.name.IndexOf("lilToon") < 0 || exclusions.Contains(mat))
                 {
                     continue;
                 }
