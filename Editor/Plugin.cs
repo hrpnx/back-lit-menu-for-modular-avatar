@@ -46,7 +46,7 @@ namespace dev.hrpnx.back_lit_menu_for_modular_avatar.editor
         private void CreateMenu(GameObject avatarRoot, BackLitMenuInstaller menuInstaller)
         {
             List<Renderer> renderers = new();
-            this.CollectRenderersRecursive(avatarRoot.transform, renderers);
+            renderers.AddRange(avatarRoot.transform.GetComponentsInChildren<Renderer>(true));
 
             var destDir = Path.Combine(
                 "Assets",
@@ -176,19 +176,6 @@ namespace dev.hrpnx.back_lit_menu_for_modular_avatar.editor
             //   the RimShade switches On/Off, causing the avatar to flicker.
             //   Therefore, the priority should be higher than FaceEmo.
             maMergeAnimator.layerPriority = 1;
-        }
-
-        private void CollectRenderersRecursive(Transform current, List<Renderer> renderers)
-        {
-            if (current.gameObject.TryGetComponent<Renderer>(out var r))
-            {
-                renderers.Add(r);
-            }
-
-            foreach (Transform child in current)
-            {
-                this.CollectRenderersRecursive(child, renderers);
-            }
         }
 
         private string GetRelativePath(Transform transform, Transform root)
