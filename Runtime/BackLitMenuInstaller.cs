@@ -10,7 +10,6 @@ namespace dev.hrpnx.back_lit_menu_for_modular_avatar.runtime
         public List<Material> Exclusions;
         public bool Default;
         public bool Saved;
-
         public VRCExpressionsMenu RootMenu;
     }
 }
