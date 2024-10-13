@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using ExpressionControl = VRC.SDK3.Avatars.ScriptableObjects.VRCExpressionsMenu.Control;
 using dev.hrpnx.back_lit_menu_for_modular_avatar.editor;
@@ -156,6 +156,10 @@ namespace dev.hrpnx.back_lit_menu_for_modular_avatar.editor
 
             // attach maMenuInstaller to menuInstaller
             var maMenuInstaller = menuInstaller.gameObject.AddComponent<ModularAvatarMenuInstaller>();
+            if (null != menuInstaller.RootMenu)
+            {
+                maMenuInstaller.installTargetMenu = menuInstaller.RootMenu;
+            }
             maMenuInstaller.menuToAppend = menu;
             var maParameters = menuInstaller.gameObject.AddComponent<ModularAvatarParameters>();
             maParameters.parameters.Add(new ParameterConfig
