@@ -19,5 +19,6 @@ namespace dev.hrpnx.back_lit_menu_for_modular_avatar.runtime
         public float Directivity;
         public float ViewStrength;
         public VRCExpressionsMenu RootMenu;
+        public bool AnimationWriteDefault = false;
     }
 }

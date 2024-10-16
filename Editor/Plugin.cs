@@ -121,7 +121,7 @@ namespace dev.hrpnx.back_lit_menu_for_modular_avatar.editor
 
             var offState = layer.stateMachine.AddState($"{baseName}_Off", new Vector3(150, 150));
             offState.motion = animOffClip;
-            offState.writeDefaultValues = false;
+            offState.writeDefaultValues = menuInstaller.AnimationWriteDefault;
 
             var toOffTransition = layer.stateMachine.AddAnyStateTransition(offState);
             toOffTransition.AddCondition(AnimatorConditionMode.IfNot, 0, baseName);
@@ -130,7 +130,7 @@ namespace dev.hrpnx.back_lit_menu_for_modular_avatar.editor
 
             var onState = layer.stateMachine.AddState($"{baseName}_On", new Vector3(150, -150));
             onState.motion = animOnClip;
-            onState.writeDefaultValues = false;
+            onState.writeDefaultValues = menuInstaller.AnimationWriteDefault;
 
             var toOnTransition = layer.stateMachine.AddAnyStateTransition(onState);
             toOnTransition.AddCondition(AnimatorConditionMode.If, 0, baseName);
