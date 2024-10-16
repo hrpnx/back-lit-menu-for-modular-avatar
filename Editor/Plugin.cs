@@ -74,16 +74,16 @@ namespace dev.hrpnx.back_lit_menu_for_modular_avatar.editor
                 var transform = renderer.gameObject.transform;
 
                 this.AddAnimation(transform, avatarRoot.transform, animOnClip, "material._UseBacklight", 1, menuInstaller.Exclusions);
-                this.AddAnimation(transform, avatarRoot.transform, animOnClip, "material._BacklightColor.r", 12, menuInstaller.Exclusions);
-                this.AddAnimation(transform, avatarRoot.transform, animOnClip, "material._BacklightColor.g", 12, menuInstaller.Exclusions);
-                this.AddAnimation(transform, avatarRoot.transform, animOnClip, "material._BacklightColor.b", 12, menuInstaller.Exclusions);
-                this.AddAnimation(transform, avatarRoot.transform, animOnClip, "material._BacklightColor.a", 1, menuInstaller.Exclusions);
-                this.AddAnimation(transform, avatarRoot.transform, animOnClip, "material._BacklightMainStrength", 0.5f, menuInstaller.Exclusions);
-                this.AddAnimation(transform, avatarRoot.transform, animOnClip, "material._BacklightNormalStrength", 1, menuInstaller.Exclusions);
-                this.AddAnimation(transform, avatarRoot.transform, animOnClip, "material._BacklightBorder", 0.6f, menuInstaller.Exclusions);
-                this.AddAnimation(transform, avatarRoot.transform, animOnClip, "material._BacklightBlur", 0.2f, menuInstaller.Exclusions);
-                this.AddAnimation(transform, avatarRoot.transform, animOnClip, "material._BacklightDirectivity", 10, menuInstaller.Exclusions);
-                this.AddAnimation(transform, avatarRoot.transform, animOnClip, "material._BacklightViewStrength", 1, menuInstaller.Exclusions);
+                this.AddAnimation(transform, avatarRoot.transform, animOnClip, "material._BacklightColor.r", menuInstaller.Color.r, menuInstaller.Exclusions);
+                this.AddAnimation(transform, avatarRoot.transform, animOnClip, "material._BacklightColor.g", menuInstaller.Color.g, menuInstaller.Exclusions);
+                this.AddAnimation(transform, avatarRoot.transform, animOnClip, "material._BacklightColor.b", menuInstaller.Color.b, menuInstaller.Exclusions);
+                this.AddAnimation(transform, avatarRoot.transform, animOnClip, "material._BacklightColor.a", menuInstaller.Color.a, menuInstaller.Exclusions);
+                this.AddAnimation(transform, avatarRoot.transform, animOnClip, "material._BacklightMainStrength", menuInstaller.MainStrength, menuInstaller.Exclusions);
+                this.AddAnimation(transform, avatarRoot.transform, animOnClip, "material._BacklightNormalStrength", menuInstaller.NormalStrength, menuInstaller.Exclusions);
+                this.AddAnimation(transform, avatarRoot.transform, animOnClip, "material._BacklightBorder", menuInstaller.Border, menuInstaller.Exclusions);
+                this.AddAnimation(transform, avatarRoot.transform, animOnClip, "material._BacklightBlur", menuInstaller.Blur, menuInstaller.Exclusions);
+                this.AddAnimation(transform, avatarRoot.transform, animOnClip, "material._BacklightDirectivity", menuInstaller.Directivity, menuInstaller.Exclusions);
+                this.AddAnimation(transform, avatarRoot.transform, animOnClip, "material._BacklightViewStrength", menuInstaller.ViewStrength, menuInstaller.Exclusions);
             }
 
             this.CreateAsset(animOnClip, destAnimClipOnFilePath);

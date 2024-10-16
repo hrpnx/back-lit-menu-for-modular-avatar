@@ -23,6 +23,13 @@ namespace dev.hrpnx.back_lit_menu_for_modular_avatar.editor
             var menuInstaller = new GameObject(menuInstallerName);
             menuInstaller.transform.SetParent(avatarRoot.transform);
             var component = menuInstaller.AddComponent<BackLitMenuInstaller>();
+            component.Color = new Color(12, 12, 12, 1);
+            component.MainStrength = 0.5f;
+            component.NormalStrength = 1;
+            component.Border = 0.6f;
+            component.Blur = 0.2f;
+            component.Directivity = 10;
+            component.ViewStrength = 1;
         }
     }
 }
